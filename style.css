@@ -10,8 +10,30 @@ div{
     display: flexbox;
 }
 
+
+html{
+    
+    --bg: linear-gradient(100deg, rgb(57,183,221) -30.08%, rgb(37,99,233)100%);
+    --text-color: rgb(24,24,24);
+    --bg-panel: rgb(253, 249, 249);
+    --ip-text: black;
+    font-weight: 400;
+    font-size: 16px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    height: 100vh;
+    position: relative;
+}
 body{
-    background: linear-gradient(100deg, rgb(168, 25, 25) -30.08%, rgb(15, 0, 0) 100%);
+    background: var(--bg);
+    color: var(--text-color);
+
+}
+html[data-theme ='dark']{
+   
+    --bg: linear-gradient(100deg, rgb(172, 26, 26) -30.08%, rgb(41, 2, 2)100%);
+    --bg-panel:rgb(5, 0, 0);
+    --text-color:rgb(158,52,52);
+    --ip-text:white;
     font-weight: 400;
     font-size: 16px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -20,10 +42,10 @@ body{
 }
 .container{
     width: 450px;
-    background-color:rgb(14, 13, 13);
-    color: rgb(245, 195, 195);
+    background-color: var(--bg-panel);
+    color: var(--text-color);
     border-radius: 15px;
-    box-shadow: 0px 2px 3px -1px rgba(250, 246, 246, 0.15);
+    box-shadow: 0px 2px 3px -1px rgba(66, 65, 65, 0.15);
     
     position:relative;
     /* left: 50%;
@@ -35,10 +57,11 @@ body{
     margin: 10px auto;
     padding-bottom: 2px;
 }
+
 h1{
 
     font-size: 36px;
-    color: #d89b9b;
+    color: var(--text-color);
     margin: 30px 0 45px;
 }
 .row{
@@ -48,23 +71,24 @@ h1{
 
 input{
     width: 100%;
-    background: rgb(184, 115, 115);
-    box-shadow: 0px 7px 35px -4px rgba(0,0,0, .14);
+    background: var(--bg-panel);
+    box-shadow: 0px 7px 35px -4px rgba(223, 221, 221, 0.14);
     border-radius: 34px;
     border: none;
     outline: none;
     padding: 20px 25px;
+    color: var(--ip-text);
 }
 
 .row input::placeholder{
     font-size: 16px;
-    color: #721212;
+    color: var(--text-color);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 input.icon{
     font-size: 35px;
-    color: rgb(192, 141, 141);
-    background-color: rgb(17, 17, 16);
+    color: var(--text-color);
+    background-color: var(--bg-panel);
     width: auto;
     border-radius: 50%;
     padding: 0px 12px;
@@ -77,13 +101,13 @@ input.icon{
 }
 
 .icon:hover{
-    color: rgb(230, 163, 163);
+    color: rgb(40, 43, 238);
     background-color: white;
-    border-color: rgb(247, 13, 13);
+    border-color: rgb(44, 72, 230);
 }
  h4{
      font-size: 24px;
-     color: #cf8c8c;
+     color: var(--text-color);
      margin: 20px 0 40px;
  }
 
@@ -93,13 +117,13 @@ input.icon{
  }
  .row ul.task_list li{
 
-     background-color: rgb(235, 134, 134);
+     background-color: var(--bg-panel);
      box-shadow: 0px 7px 33px -4px rgba(0,0,0, .14);
      border-radius: 34px;
      padding: 20px 25px;
      margin-bottom: 17px;
      font-size: 16px;
-     color: #0e0d0d;
+     color: var(--text-color);
      position: relative;
      overflow: hidden;
     
@@ -117,6 +141,78 @@ input.icon{
 }
 .row ul.task_list li span:hover{
     color: rgb(17, 1, 1);
-    background-color: rgb(116, 2, 2);
+    background-color: rgb(248, 8, 8);
+}
+.toggle-container{
+    color: rgb(17, 17, 17);
+    display:flex;
+    justify-content: right;
+    align-items: flex-end;
+
 }
 
+input[type=checkbox]{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    color: whitesmoke;
+}
+label{
+    cursor: pointer;
+    /* text-indent: -9999px; */
+    width: 58px;
+    height: 27px;
+    background: rgb(102, 192, 223);
+    /* float: right; */
+    border-radius: 100px;
+    position:relative;
+    margin: 1em;
+    
+}
+
+label::after{
+    content: " ";
+    position: absolute;
+    top: 3px;
+    width: 20px;
+    height: 20px;
+    background: rgb(250, 247, 247);
+   
+    border-radius: 900px;
+    transition: 0.7s;
+    
+}
+
+input:checked + label{
+    background: rgb(238, 25, 25);
+}
+
+input:checked + label:after{
+    
+    left: calc(100% -5px);
+    transform:translateX(-100%)
+}
+label:active:after{
+    width:45px;
+    
+}
+
+html.transition,
+html.transition *,
+html.transition *::before,
+html.transition *::after{
+    transition: all 750ms !important;
+    transition-delay: 0 !important;
+}
+
+@media(max-width:450px){
+    .container{
+        width: 300px;
+    }
+}
+
+@media(max-width:280px){
+    .container{
+        width: 220px;
+    }
+}
